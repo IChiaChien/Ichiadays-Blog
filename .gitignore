@@ -15,9 +15,21 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.*
+
+# Astro cache
+.astro/
+
+# IDE settings 
+.vscode/
+.idea/
+.idx/
 
 # macOS-specific files
 .DS_Store
 
+# TypeScript declarations
 icon.d.ts
 *.cache
+
+README_ch.md

@@ -73,57 +73,74 @@
   --font-size-xxxl: clamp(54.93px, 3.32vw + 41.64px, 84.17px);
 }
 
+/* --- 全域設定 --- */
 html,
 body {
-	line-height: 1.5;
-	font-family: var(--theme-font-family-sans);
-	font-size: var(--font-size-base);
-	color: var(--theme-on-bg);
-} 
-
-h1,
-h2,
-h3 {
-	font-family: var(--theme-font-family-serif);
-	font-weight: 700;
+  /* 使用我們剛剛在 theme.css 定義的變數 */
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--theme-on-bg);
+  font-weight: 400; /* 字重 400 */
 }
 
+/* --- 標題設定 --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+/* H1: 電腦 40px / 手機自動縮小 */
 h1 {
-	font-size: var(--font-size-xxl);
+  font-weight: 800; /* 字重 800 */
+  line-height: 1.4; /* 行距 1.4em */
+  font-size: 40px;  /* 電腦版預設 */
 }
 
+/* H2: 24px / 字重 600 */
 h2 {
-	font-size: var(--font-size-xl);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.3;
+  margin-top: 2em; /* 標題上方留白，閱讀體驗更好 */
+  margin-bottom: 1em;
 }
 
+/* H3: 22px / 字重 500 */
 h3 {
-	font-size: var(--font-size-lg);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.3;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
 }
 
-h1,
-h2 {
-	line-height: 1.1;
-	font-weight: 700;
-}
-
-h3 {
-	font-weight: 500;
-}
-
+/* H6: 用來做小標題 */
 h6 {
-	font-size: var(--font-size-sm);
+  font-size: var(--font-size-sm, 16px);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+/* 段落 */
 p {
-	margin: 0 0 1rem 0;
+  margin: 0 0 1.5rem 0; /* 段落間距加大一點，手機好讀 */
 }
 
+/* --- 手機版優化 (RWD) --- */
+/* 當螢幕寬度小於 768px (平板與手機) 時 */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 32px; /* 稍微縮小，避免手機上標題太巨大 */
+  }
+  
+  /* 稍微縮小 H2，讓它跟 H1 有層次 */
+  h2 {
+    font-size: 22px; 
+    margin-top: 1.5em;
+  }
+}
+
+/* --- 其他元件 --- */
 blockquote {
 	font-style: italic;
 	font-size: var(--font-size-base);
