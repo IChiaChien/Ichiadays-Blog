@@ -1,92 +1,114 @@
 ---
-import { Container, FeatureCard } from '@components/odyssey-theme';
-
+import { Container, FeatureCard, BlogPostsList } from '@components/odyssey-theme';
 import Layout from '../layouts/Page.astro';
 import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
+import { parse } from 'date-fns'; // use date to order
+
+// 1. 抓取最新文章 (只抓前 3 篇)
+const posts = await Astro.glob('./blog/*.mdx').then(posts =>
+	posts
+		.map(({ frontmatter, url }) => ({
+			title: frontmatter.title,
+			description: frontmatter.description,
+			publishDate: parse(frontmatter.publishDate, 'MMMM d, yyyy', new Date()),
+			featuredImage: frontmatter.featuredImage,
+			href: url,
+		}))
+		.sort((a, b) => b.publishDate - a.publishDate) // 按日期降序
+		.slice(0, 4) // 只取前 4 篇
+);
+
+const seo = {
+	title: '你的網站名稱 | 副標題 (例如：日本生活探險)',
+	description: '這裡寫你的網站 SEO 描述，例如：分享日本留學、東京工作、工程師生活的點點滴滴...',
+};
 ---
 
-<Layout>
+<Layout {seo}>
+	<!-- Part 2: Hero Section -->
+    <!-- 你可以去修改 components/sections/heros/HomeHeroSection.astro 來換圖片和文字 -->
 	<HomeHeroSection />
+
 	<Container>
+        <!-- Part 2: Category -->
 		<section class="feature-card__section">
-			<h2>Landing Pages</h2>
+			<h2>文章主題</h2>
 			<p>
-				Use one of our landing pages to jumpstart your website or
-				ad campaign.
+				開始探索一珈的生活紀錄。
 			</p>
 			<div class="feature-card__grid">
-				<FeatureCard href="/landing-pages/landing-1" title="Landing Page 1" imgSrc="/assets/images/home/screenshots/landing-1">
-				</FeatureCard>
-				<FeatureCard href="/landing-pages/landing-2" title="Landing Page 2" imgSrc="/assets/images/home/screenshots/landing-2">
-				</FeatureCard>
+                <!-- Category 1 -->
+				<FeatureCard 
+                    href="/blog/category/japan-explorer" 
+                    title="日本探險家" 
+                    imgSrc="/assets/images/home/categories/jp_adventurer"
+                >
+                </FeatureCard>
+                
+                <!-- Category 2 -->
+				<FeatureCard 
+                    href="/blog/category/life-lab" 
+                    title="生活實驗室" 
+                    imgSrc="/assets/images/home/categories/life_lab"
+                >
+                </FeatureCard>
+
+                <!-- Add more categories here -->
 			</div>
 		</section>
 	</Container>
 
+    <!-- 區塊三：最新文章 -->
 	<Container>
-		<section class="feature-card__section">
-			<h2>Company Pages</h2>
-			<p>
-				Use one of our prebuilt company pages for your about page, contact page,
-				legal pages, blog posts, etc.
-			</p>
-			<div class="feature-card__grid">
-				<FeatureCard href="/company/about" title="About Page" imgSrc="/assets/images/home/screenshots/about">
-				</FeatureCard>
-				<FeatureCard href="/company/contact" title="Contact Page" imgSrc="/assets/images/home/screenshots/contact">
-				</FeatureCard>
-				<FeatureCard href="/blog/" title="Blog Page" imgSrc="/assets/images/home/screenshots/blog">
-				</FeatureCard>
-				<FeatureCard
-					href="/blog/posts/remote-work-mental-health"
-					title="Blog Post"
-          imgSrc="/assets/images/home/screenshots/blog-post"
-				>
-				</FeatureCard>
-				<FeatureCard
-					href="/company/legal"
-					imgSrc="/assets/images/home/screenshots/legal"
-					title="Legal Page"
-				>
-				</FeatureCard>
-			</div>
-		</section>
-	</Container>
-
-	<Container>
-		<section class="feature-card__section">
-			<h2>Theme Pages</h2>
-			<p>Learn more about how to set up and use the Odyssey Theme.</p>
-			<div class="feature-card__grid">
-				<FeatureCard
-					href="/theme/get-started"
-					imgSrc="/assets/images/home/screenshots/get-started"
-					title="Get Started"
-				>
-				</FeatureCard>
-				<FeatureCard
-					href="/theme/style-guide"
-					imgSrc="/assets/images/home/screenshots/style-guide"
-					title="Style Guide"
-				>
-				</FeatureCard>
-			</div>
+		<section class="blog-posts-list__section">
+			<h2>最新文章</h2>
+			<BlogPostsList posts={posts} />
+            
+            <!-- 查看更多按鈕 -->
+            <div class="view-all-btn">
+                <a href="/blog" class="btn">查看所有文章 &rarr;</a>
+            </div>
 		</section>
 	</Container>
 </Layout>
 
 <style>
-	.feature-card__section {
+    /* 區塊間距 */
+	.feature-card__section,
+    .blog-posts-list__section {
 		margin: var(--section-margin) auto;
 	}
+
+    /* 分類卡片的網格排版 */
 	.feature-card__grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(2, 1fr); /* 電腦版兩欄 */
 		gap: var(--theme-grid-gap);
 	}
+
+    /* 查看更多按鈕樣式 */
+    .view-all-btn {
+        text-align: center;
+        margin-top: 2rem;
+    }
+    .btn {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background-color: var(--theme-primary);
+        color: var(--theme-on-primary);
+        border-radius: var(--theme-button-border-radius);
+        text-decoration: none;
+        font-weight: 600;
+        transition: opacity 0.2s;
+    }
+    .btn:hover {
+        opacity: 0.8;
+    }
+
+    /* 手機版優化 */
 	@media (max-width: 768px) {
 		.feature-card__grid {
-			grid-template-columns: 1fr;
+			grid-template-columns: 1fr; /* 手機版變一欄 */
 		}
 	}
 </style>
