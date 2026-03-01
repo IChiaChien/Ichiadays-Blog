@@ -1,18 +1,25 @@
 ---
 ---
-
-<p class="odyssey-logo">Odyssey</p>
+<!-- 使用 img 標籤顯示你的 Logo -->
+<img 
+  src="/assets/images/logo.png" 
+  alt="Days by Ichia Logo" 
+  class="site-logo"
+/>
 
 <style>
-	.odyssey-logo {
-		width: fit-content;
-		margin: 0;
-		font-family: var(--theme-font-family-serif);
-    font-size: var(--font-size-md);
-		color: inherit;
-	}
-	.odyssey-logo:hover {
-		text-decoration: underline;
-		cursor: pointer;
-	}
+  .site-logo {
+    /* 設定高度，讓瀏覽器自動計算寬度，保持比例 */
+    height: 100px; 
+    width: auto;
+    object-fit: contain;
+    
+    display: block;
+  }
+
+  /* 滑鼠移過去的效果 (選用) */
+  .site-logo:hover {
+    opacity: 0.8; 
+    cursor: pointer;
+  }
 </style>
