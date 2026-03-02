@@ -1,8 +1,8 @@
 export default {
-	title: `Odyssey Astro Theme | A Marketing Website Theme for Startups and Businesses`,
-	description: `A simple, clean, and modern theme for a startup or businesses' marketing website.`,
-	url: `https://odyssey-theme.sapling.supply`, // No trailing slash!
+	title: `一珈寫日子 | 用文字記錄經歷，幫助走在相同路上的平凡人`,
+	description: `用文章記錄，這由無數個選擇編織而成的故事。`,
+	url: `https://ichiadays.com`, // No trailing slash!
 	name: `Ichia's days`, // The short name of the business or brand name. Used for things like the copyright in the footer.
 	enableThemeSwitcher: false,
-	showPlug: true, // Disable this if you want to remove the plug from the footer. (╯°□°)╯︵ ┻━┻
+	showPlug: false, // Disable this if you want to remove the plug from the footer. (╯°□°)╯︵ ┻━┻
 };

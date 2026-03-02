@@ -4,15 +4,15 @@ export const nav = [
 		slug: '/',
 	},
 	{
-		title: 'Blog',
-		slug: '/blog',
+		title: '日本探險家',
+		slug: '/category/life-in-japan',
 	},
 	{
-		title: 'About',
-		slug: '/company/about',
+		title: '生活實驗室',
+		slug: '/category/life_lab',
 	},
 	{
-		title: 'Contact',
-		slug: '/company/contact',
+		title: '關於我',
+		slug: '/about',
 	},
 ];

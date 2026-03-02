@@ -4,8 +4,8 @@ import Layout from '../layouts/Page.astro';
 import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
 import { parse } from 'date-fns'; // use date to order
 
-// 1. 抓取最新文章 (只抓前 3 篇)
-const posts = await Astro.glob('./blog/*.mdx').then(posts =>
+// 1. Get the latest 3 posts
+const posts = await Astro.glob('./*.mdx').then(posts =>
 	posts
 		.map(({ frontmatter, url }) => ({
 			title: frontmatter.title,
@@ -19,36 +19,32 @@ const posts = await Astro.glob('./blog/*.mdx').then(posts =>
 );
 
 const seo = {
-	title: '你的網站名稱 | 副標題 (例如：日本生活探險)',
-	description: '這裡寫你的網站 SEO 描述，例如：分享日本留學、東京工作、工程師生活的點點滴滴...',
+	title: '一珈寫日子| 日本生活探險, 生活實驗室',
+	description: '分享日本留學、東京工作、工程師生活的點點滴滴',
 };
 ---
 
 <Layout {seo}>
-	<!-- Part 2: Hero Section -->
-    <!-- 你可以去修改 components/sections/heros/HomeHeroSection.astro 來換圖片和文字 -->
+	<!-- Part 1: Hero Section -->
 	<HomeHeroSection />
 
 	<Container>
         <!-- Part 2: Category -->
 		<section class="feature-card__section">
-			<h2>文章主題</h2>
-			<p>
-				開始探索一珈的生活紀錄。
-			</p>
+			<h1>文章分類</h1>
 			<div class="feature-card__grid">
                 <!-- Category 1 -->
 				<FeatureCard 
-                    href="/blog/category/japan-explorer" 
-                    title="日本探險家" 
-                    imgSrc="/assets/images/home/categories/jp_adventurer"
+                    href="/category/life-in-japan" 
+                    title="🌸 日本探險家" 
+                    imgSrc="/assets/images/home/categories/jp_explorer"
                 >
                 </FeatureCard>
                 
                 <!-- Category 2 -->
 				<FeatureCard 
-                    href="/blog/category/life-lab" 
-                    title="生活實驗室" 
+                    href="/category/life-lab" 
+                    title="🥯 生活實驗室" 
                     imgSrc="/assets/images/home/categories/life_lab"
                 >
                 </FeatureCard>
@@ -58,13 +54,12 @@ const seo = {
 		</section>
 	</Container>
 
-    <!-- 區塊三：最新文章 -->
+    <!-- Part3：Recently P -->
 	<Container>
 		<section class="blog-posts-list__section">
-			<h2>最新文章</h2>
+			<h1>最新文章</h1>
 			<BlogPostsList posts={posts} />
             
-            <!-- 查看更多按鈕 -->
             <div class="view-all-btn">
                 <a href="/blog" class="btn">查看所有文章 &rarr;</a>
             </div>
@@ -73,16 +68,14 @@ const seo = {
 </Layout>
 
 <style>
-    /* 區塊間距 */
 	.feature-card__section,
     .blog-posts-list__section {
 		margin: var(--section-margin) auto;
 	}
 
-    /* 分類卡片的網格排版 */
 	.feature-card__grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr); /* 電腦版兩欄 */
+		grid-template-columns: repeat(2, 1fr); 
 		gap: var(--theme-grid-gap);
 	}
 
@@ -105,7 +98,7 @@ const seo = {
         opacity: 0.8;
     }
 
-    /* 手機版優化 */
+    /* For smartphone */
 	@media (max-width: 768px) {
 		.feature-card__grid {
 			grid-template-columns: 1fr; /* 手機版變一欄 */

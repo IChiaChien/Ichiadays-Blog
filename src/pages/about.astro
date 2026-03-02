@@ -1,0 +1,41 @@
+---
+import { TextSection } from '@components/odyssey-theme';
+import Layout from '../layouts/Page.astro';
+import HeroSection from '../components/sections/heros/HeroSection.astro';
+
+const seo = {
+	title: 'About | 一珈寫日子',
+	description: 'About Page',
+};
+---
+
+<Layout {seo}>
+	<HeroSection>
+		<div slot="text-container">
+			<h1>About Me 一珈</h1>
+			<p>
+				<b>生活是一連串獨一無二的體驗，值得被寫下。</b>
+			</p>
+      <p>
+				來自台灣的女生，一個在日本的擔任資料科學家，也正學習用文字分析自己。
+			</p>
+		</div>
+    <picture slot="image-container">
+      <img
+        src="/assets/images/home/profile.jpg"
+        alt="ichia profile"
+        id="home-hero-image"
+      />
+    </picture>
+	</HeroSection>
+  <TextSection narrow>
+    <p>
+      真正的名字讀音和「一珈」相同，「珈」是原本的名字之一，因為正是從小到大的經歷才灌溉成現在的模樣。「一」代表獨一無二，提醒自己和別人再怎麼相似，也是獨特的，不需要和別人比較。
+    </p>
+    <p>
+      台灣嘉義出身，大學開始北上生活，非日文系。工作兩年後，到日本讀語言學程開始在東京大冒險。在 2025年4月進入日本公司，擔任資料科學家。
+    <p>
+      因為不相信自己的記憶力，盡力把生活中走過的日子紀錄下來。也受到各種文章的照顧，想把自己的經驗分享出來，幫助其他人。
+    </p>
+  </TextSection>
+</Layout>

@@ -1,0 +1,57 @@
+---
+import { parse, isBefore } from 'date-fns';
+import {
+	Container,
+	TextCardSection,
+	BlogPostsList,
+} from '@components/odyssey-theme';
+import Layout from '../layouts/Page.astro';
+import NewsletterForm from '../components/forms/NewsletterForm.astro';
+const allFiles = await Astro.glob('./*.mdx'); 
+
+const posts = await Astro.glob('./*.mdx').then(posts => 
+    posts.filter(post => 
+        post.frontmatter.publishDate // Retrieve only dated articles
+    )
+		.map(({ frontmatter, url }) => ({
+			title: frontmatter.title,
+			description: frontmatter.description,
+			authors: frontmatter.authors,
+			publishDate: parse(frontmatter.publishDate, 'MMMM d, yyyy', new Date()),
+			featuredImage: frontmatter.featuredImage,
+			excerpt: frontmatter.excerpt,
+			href: url,
+		}))
+		.sort((a, b) => {
+			if (isBefore(a.publishDate, b.publishDate)) return 1;
+			if (isBefore(b.publishDate, a.publishDate)) return -1;
+			return 0;
+		})
+);
+
+const seo = {
+	title: 'Ichia Blog | Days by Ichia',
+	description: '',
+};
+---
+
+<Layout {seo}>
+	<Container>
+		<TextCardSection>
+			<h1>ALL</h1>
+			<p>
+				分享日本留學、東京工作、工程師生活的點點滴滴。
+			</p>
+		</TextCardSection>
+		<section class="blog-posts-list__section">
+			<h2>文章</h2>
+			<BlogPostsList posts={posts} />
+		</section>
+	</Container>
+</Layout>
+
+<style>
+	.blog-posts-list__section {
+		margin: var(--section-margin) auto;
+	}
+</style>

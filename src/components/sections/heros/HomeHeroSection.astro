@@ -8,32 +8,27 @@ import {ThemeSwitcher} from '../../theme-switcher/theme-switcher';
 <Container>
 	<section class="hero-section__section">
 		<div class="hero-section__text">
-				<h1>Welcome to Odyssey</h1>
+				<h1>一珈寫日子</h1>
 				<p>
-					A marketing website theme built with <a
-						href="https://astro.build"
-						target="_blank"
-						rel="noreferrer">Astro</a
-					> and carefully crafted for startups and businesses.
+					用文字記錄名為生活的獨特冒險，這由無數個選擇編織而成的故事。
 				</p>
 				<div class="hero-btns__container">
-					<Button href="/theme/get-started" customIcon
-						>Get Started
+					<Button href="/about" customIcon
+						>About Me
             <Fragment slot="icon">
               <Icon name="ic:baseline-chevron-right"/>
             </Fragment>
             </Button
 					>
-					<Button href="/theme/style-guide" unelevated>Style Guide</Button>
 				</div>
         {settings.enableThemeSwitcher && <ThemeSwitcher client:only/>}
 		</div>
 		<div class="hero-section__image">
 				<picture>
 					<img
-						src="/assets/images/home/classic-hero.jpg"
-						alt="Astro Odyssey"
-						id="home-hero-image"
+						src="/assets/images/home/profile.png"
+						alt="Ichia Profile"
+						id="home-profile-image"
 					/>
 				</picture>
 		</div>
