@@ -24,6 +24,7 @@ pnpm-debug.log*
 .vscode/
 .idea/
 .idx/
+.crossnote/ 
 
 # macOS-specific files
 .DS_Store
