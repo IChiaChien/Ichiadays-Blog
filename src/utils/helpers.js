@@ -3,11 +3,7 @@ export function generateSlug(string) {
 		.toString()
 		.trim()
 		.toLowerCase()
-		.replace(/\s+/g, '-')
-		.replace(/[^\w\-]+/g, '')
-		.replace(/\-\-+/g, '-')
-		.replace(/^-+/, '')
-		.replace(/-+$/, '');
+		.replace(/\s+/g, '-');
 }
 
 export function generateTagData(categories) {
