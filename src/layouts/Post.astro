@@ -24,7 +24,7 @@ const seo = {
     <ul class="post-tags__list">
       {allTagsData.map(tag => (
         <li class="post-tags__tag">
-          <a href={`/blog/tags/${tag.slug}`}>
+          <a href={`/tags/${tag.slug}`}>
             {tag.title}
           </a>
         </li>
@@ -40,6 +40,11 @@ const seo = {
     <article id="article">
         <slot></slot>
     </article>
+    <!-- BUY ME A COFFEE -->
+    <div style="text-align: left; margin-top: 3rem; margin-bottom: 3rem;">
+        <p style="margin-bottom: 1rem; font-weight: ">最後，如果這篇文章對你有幫助，可以考慮請我喝杯咖啡，支持一珈繼續創作：）</p>
+        <script is:inline type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="ichiadays" data-color="#e38a20" data-emoji="☕"  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#FFDD00" ></script>
+    </div>
   </Container>
 </Layout>
 
