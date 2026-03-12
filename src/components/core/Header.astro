@@ -74,10 +74,16 @@ const { navData, rightMenu } = Astro.props;
 <style>
   header {
     width: 100%;
-    padding: 1rem 0.5rem;
+    padding: 0.4rem 1rem; 
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* 👇 新增這三行來固定 Header 👇 */
+    position: fixed;
+    top: 0;
+    background-color: var(--theme-bg); /* 給予背景色，以免往下滑時文字重疊 */
+    z-index: 9999 ; /* 確保它浮在所有內容最上層 */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   }
   header.header--right {
     display: grid;
