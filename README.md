@@ -174,3 +174,9 @@ The ultimate goal of this project is to accommodate content exported from `WordP
    - Update the image paths in the Markdown content to point to the new local paths.
 
 Once these steps are complete, all WordPress posts will exist in a format natively supported by the Astro project, allowing you to enjoy all the benefits of a static site.
+
+## License
+
+This repository is published under the [MIT License](LICENSE).
+
+The site UI is derived from [Odyssey Theme](https://github.com/treefarmstudio/odyssey-theme) by Treefarm Studio LLC. Odyssey Theme portions remain under its original MIT terms. Modifications and additions in this repository are copyright (c) IChia Chien and are also released under the MIT License.

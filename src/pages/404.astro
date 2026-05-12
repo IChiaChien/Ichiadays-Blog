@@ -3,18 +3,18 @@ import { Button, Container, TextCardSection } from '@components/odyssey-theme';
 import Layout from '../layouts/Page.astro';
 
 const seo = {
-	title: 'Get Started using the Astro Odyssey Theme',
-	description: 'Get started on how to setup and use this Astro theme.',
+	title: '找不到頁面 | 一珈寫日子',
+	description: '你造訪的頁面不存在，請返回首頁繼續閱讀。',
 };
 ---
 
 <Layout {seo}>
 	<Container>
 		<TextCardSection>
-			<h1>404</h1>
-			<h2>Page Not Found 👀</h2>
+			<h1>找不到頁面</h1>
+			<p>你造訪的網址可能已變更，或暫時無法使用。</p>
 			<div class="cta-buttons__container">
-				<Button href="/">Return Home</Button>
+				<Button href="/">返回首頁</Button>
 			</div>
 		</TextCardSection>
 	</Container>
@@ -26,16 +26,7 @@ const seo = {
 		flex-wrap: wrap;
 	}
 	.cta-buttons__container :global(a) {
-		margin-right: 1rem;
-		margin-bottom: 1rem;
-	}
-	.code-buttons__container {
-		margin: 1rem auto;
-		display: flex;
-		flex-wrap: wrap;
-	}
-	.code-buttons__container > a {
-		margin-right: 1rem;
-		margin-bottom: 1rem;
+		margin-right: var(--space-4);
+		margin-bottom: var(--space-4);
 	}
 </style>

@@ -1,5 +1,5 @@
 ---
-import { Container, FeatureCard, BlogPostsList } from '@components/odyssey-theme';
+import { Container, FeatureCard, BlogPostsList, Button } from '@components/odyssey-theme';
 import Layout from '../layouts/Page.astro';
 import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
 import { parse } from 'date-fns'; // use date to order
@@ -31,12 +31,12 @@ const seo = {
 	<Container>
         <!-- Part 2: Category -->
 		<section class="feature-card__section">
-			<h1>文章分類</h1>
+			<h2>文章分類</h2>
 			<div class="feature-card__grid">
                 <!-- Category 1 -->
 				<FeatureCard 
                     href="/category/life-in-japan" 
-                    title="🌸 日本探險家" 
+                    title="日本探險家" 
                     imgSrc="/assets/images/home/categories/jp_explorer"
                 >
                 </FeatureCard>
@@ -44,7 +44,7 @@ const seo = {
                 <!-- Category 2 -->
 				<FeatureCard 
                     href="/category/life-lab" 
-                    title="🥯 生活實驗室" 
+                    title="生活實驗室" 
                     imgSrc="/assets/images/home/categories/life_lab"
                 >
                 </FeatureCard>
@@ -57,11 +57,11 @@ const seo = {
     <!-- Part3：Recently P -->
 	<Container>
 		<section class="blog-posts-list__section">
-			<h1>最新文章</h1>
+			<h2>最新文章</h2>
 			<BlogPostsList posts={posts} />
             
             <div class="view-all-btn">
-                <a href="/blog" class="btn">查看所有文章 &rarr;</a>
+                <Button href="/blog">查看所有文章 &rarr;</Button>
             </div>
 		</section>
 	</Container>
@@ -73,29 +73,21 @@ const seo = {
 		margin: var(--section-margin) auto;
 	}
 
+	.feature-card__section > h2,
+	.blog-posts-list__section > h2 {
+		margin-top: 0;
+	}
+
 	.feature-card__grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr); 
 		gap: var(--theme-grid-gap);
 	}
 
-    /* 查看更多按鈕樣式 */
     .view-all-btn {
-        text-align: center;
-        margin-top: 2rem;
-    }
-    .btn {
-        display: inline-block;
-        padding: 0.5rem 1.5rem;
-        background-color: var(--theme-primary);
-        color: var(--theme-on-primary);
-        border-radius: var(--theme-button-border-radius);
-        text-decoration: none;
-        font-weight: 600;
-        transition: opacity 0.2s;
-    }
-    .btn:hover {
-        opacity: 0.8;
+        display: flex;
+        justify-content: center;
+        margin-top: var(--space-8);
     }
 
     /* For smartphone */

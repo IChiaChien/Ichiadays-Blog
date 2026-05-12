@@ -6,16 +6,6 @@ body {
 body {
 	max-width: 1920px;
 	margin: 0 auto;
-	background-color: var(--theme-bg);
+	background-color: var(--color-bg);
 	position: relative;
-}
-
-pre {
-  padding: 1em;
-  border-radius: 0.5em;
-  overflow: auto;
-}
-
-pre .language-id {
-  display: none;
 }

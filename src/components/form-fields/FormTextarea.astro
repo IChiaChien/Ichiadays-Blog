@@ -18,7 +18,8 @@ const { label, name, placeholder, rows = 4, required} = Astro.props;
     border-radius: var(--form-field-border-radius, 0.25rem);
     outline-style: none;
   }
-  .form-field__container textarea:focus {
-    border: var(--form-field-border-width) solid var(--form-field-border-focus-color, #000);
+  .form-field__container textarea:focus-visible {
+    border: var(--form-field-border-width) solid var(--color-accent);
+    outline: 2px solid transparent;
   }
 </style>

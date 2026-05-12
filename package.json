@@ -3,7 +3,7 @@
 	"version": "3.1.0",
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:treefarmstudio/odyssey-theme"
+		"url": "git@github.com:IChiaChien/Ichiadays-Blog"
 	},
 	"scripts": {
 		"dev": "astro dev",

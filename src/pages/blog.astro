@@ -30,15 +30,15 @@ const posts = await Astro.glob('./*.mdx').then(posts =>
 );
 
 const seo = {
-	title: 'Ichia Blog | Days by Ichia',
-	description: '',
+	title: '全部文章 | 一珈寫日子',
+	description: '分享日本留學、東京工作、工程師生活的點點滴滴。',
 };
 ---
 
 <Layout {seo}>
 	<Container>
 		<TextCardSection>
-			<h1>ALL</h1>
+			<h1>全部文章</h1>
 			<p>
 				分享日本留學、東京工作、工程師生活的點點滴滴。
 			</p>
