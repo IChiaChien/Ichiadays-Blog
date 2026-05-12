@@ -20,7 +20,8 @@ const {type = "text", label, name, placeholder, required} = Astro.props;
     border-radius: var(--form-field-border-radius, 0.25rem);
     outline-style: none;
   }
-  .form-field__container input:focus {
-    border: 2px solid var(--form-field-border-focus-color, #000);
+  .form-field__container input:focus-visible {
+    border: 2px solid var(--color-accent);
+    outline: 2px solid transparent;
   }
 </style>

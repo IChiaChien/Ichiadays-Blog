@@ -20,47 +20,53 @@ const Tag = href ? 'a' : 'button';
 <style>
   .btn {
     width: fit-content;
-    padding: 0.36rem 0.92rem;
+    padding: var(--space-2) var(--space-4);
     margin-bottom: 0;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--theme-primary);
-    color: var(--theme-on-primary);
-    border: none;
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+    border: 2px solid transparent;
     border-radius: var(--theme-button-border-radius);
     font-weight: 500;
+    font-size: var(--font-size-md);
+    transition: background-color var(--theme-transition), color var(--theme-transition), border-color var(--theme-transition);
   }
   .btn:hover {
-    background-color: var(--theme-primary-hover);
+    background-color: var(--color-accent-hover);
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
   .btn--unelevated {
     background-color: transparent;
-    color: var(--theme-on-bg);
+    color: var(--color-text);
+    border-color: transparent;
   }
   .btn--unelevated:hover {
     background-color: transparent;
-    opacity: var(--theme-primary-hover);
+    color: var(--color-accent);
   }
   .btn--outlined {
-    color: var(--theme-primary);
+    color: var(--color-accent);
     background-color: transparent;
-    border: 2px solid var(--theme-primary);
-    transition: background-color var(--theme-transition);
+    border-color: var(--color-accent);
   }
   .btn--outlined:hover {
-    background-color: var(--theme-primary);
-    color: var(--theme-on-primary);
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
   }
   .custom-icon__span {
-    margin-left: 0.25rem;
+    margin-left: var(--space-1);
     display: flex;
     align-items: center;
   }
 
   .custom-icon__span :global(svg) {
-    width: 24px;
-    height: 24px;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   a.btn {
@@ -68,6 +74,5 @@ const Tag = href ? 'a' : 'button';
   }
   button.btn {
     cursor: pointer;
-    outline: none;
   }
 </style>

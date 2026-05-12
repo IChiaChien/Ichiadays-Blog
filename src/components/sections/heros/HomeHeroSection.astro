@@ -1,36 +1,32 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { Container, Button } from '@components/odyssey-theme';
-import settings from '../../../config/settings.js';
-import {ThemeSwitcher} from '../../theme-switcher/theme-switcher';
 ---
 
 <Container>
 	<section class="hero-section__section">
 		<div class="hero-section__text">
-				<h1>一珈寫日子</h1>
-				<p>
-					用文字記錄名為生活的獨特冒險，這由無數個選擇編織而成的故事。
-				</p>
-				<div class="hero-btns__container">
-					<Button href="/about" customIcon
-						>About Me
-            <Fragment slot="icon">
-              <Icon name="ic:baseline-chevron-right"/>
-            </Fragment>
-            </Button
-					>
-				</div>
-        {settings.enableThemeSwitcher && <ThemeSwitcher client:only/>}
+			<h1>一珈寫日子</h1>
+			<p>
+				用文字記錄名為生活的獨特冒險，這由無數個選擇編織而成的故事。
+			</p>
+			<div class="hero-btns__container">
+				<Button href="/about" customIcon>
+					關於我
+					<Fragment slot="icon">
+						<Icon name="ic:baseline-chevron-right" />
+					</Fragment>
+				</Button>
+			</div>
 		</div>
 		<div class="hero-section__image">
-				<picture>
-					<img
-						src="/assets/images/home/profile.png"
-						alt="Ichia Profile"
-						id="home-profile-image"
-					/>
-				</picture>
+			<picture>
+				<img
+					src="/assets/images/home/profile.png"
+					alt="Ichia Profile"
+					id="home-profile-image"
+				/>
+			</picture>
 		</div>
 	</section>
 </Container>
@@ -38,37 +34,45 @@ import {ThemeSwitcher} from '../../theme-switcher/theme-switcher';
 <style>
 	.hero-section__section {
 		margin: var(--section-margin) auto;
-		min-height: clamp(90vh, 100vw, calc(100vh - var(--navbar-height)));
+		padding-block: var(--space-8);
+		min-height: min(72vh, calc(100vh - var(--header-height)));
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
 		align-items: center;
-		gap: 1rem;
+		gap: var(--space-8);
 	}
 	.hero-section__text {
-		justify-self: center;
-		max-width: 25rem;
+		justify-self: start;
+		max-width: 28rem;
 	}
 	.hero-btns__container {
 		display: flex;
 		align-items: center;
-		gap: 1rem;
-	}
-	.hero-btns__container {
-		margin-right: 1rem;
+		gap: var(--space-4);
+		margin-top: var(--space-4);
 	}
 	.hero-section__image {
 		display: flex;
+		justify-content: center;
 	}
 	.hero-section__image img {
 		width: 100%;
-		height: 100%;
-		max-height: 80vh;
+		max-height: min(70vh, 36rem);
 		object-fit: cover;
-		border-radius: var(--theme-shape-radius);
+		border-radius: var(--radius-lg);
 	}
 	@media (max-width: 768px) {
 		.hero-section__section {
 			grid-template-columns: 1fr;
+			min-height: auto;
+			padding-block: var(--space-6);
+		}
+		.hero-section__text {
+			order: -1;
+			max-width: none;
+		}
+		.hero-section__image img {
+			max-height: 24rem;
 		}
 	}
 </style>

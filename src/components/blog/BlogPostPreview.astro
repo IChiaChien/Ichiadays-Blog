@@ -1,10 +1,11 @@
 ---
 const {post} = Astro.props;
+const imageAlt = post.excerpt ? `${post.title}：${post.excerpt}` : post.title;
 ---
 
 <li class="blog-post__preview">
   <a href={post.href}>
-    <img src={post.featuredImage} />
+    <img src={post.featuredImage} alt={imageAlt} loading="lazy" />
     <h3>{post.title}</h3>
     {post.excerpt && <p>{post.excerpt}</p>}
   </a>
@@ -12,20 +13,35 @@ const {post} = Astro.props;
 
 
 <style>
-.blog-post__preview img {
-  margin-bottom: 1rem;
-  border-radius: calc(var(--theme-shape-radius) /2);
-  transition: border-radius var(--theme-transition);
+.blog-post__preview {
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  transition: border-color var(--theme-transition), box-shadow var(--theme-transition);
 }
-.blog-post__preview:hover img {
-  border-radius: var(--theme-shape-radius);
+.blog-post__preview:hover,
+.blog-post__preview:focus-within {
+  border-color: var(--color-border);
+  box-shadow: 0 0.5rem 1.25rem rgba(94, 69, 54, 0.08);
+}
+.blog-post__preview img {
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-md);
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  object-fit: cover;
 }
 .blog-post__preview a {
   display: block;
   text-decoration: none;
   color: inherit;
+  padding: var(--space-2);
 }
 .blog-post__preview h3 {
-  margin: 0;
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-lg);
 }
-</style> 
+.blog-post__preview p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+}
+</style>

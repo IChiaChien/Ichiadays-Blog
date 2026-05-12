@@ -18,6 +18,7 @@ export const footerSocials = [
 
 export const footerLists = [
 	{
+		title: '網站連結',
 		items: [
 			{
 				title: '日本探險家',

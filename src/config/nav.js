@@ -1,6 +1,6 @@
 export const nav = [
 	{
-		title: 'Home',
+		title: '首頁',
 		slug: '/',
 	},
 	{
@@ -9,7 +9,7 @@ export const nav = [
 	},
 	{
 		title: '生活實驗室',
-		slug: '/category/life_lab',
+		slug: '/category/life-lab',
 	},
 	{
 		title: '關於我',

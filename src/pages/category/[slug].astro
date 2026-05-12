@@ -7,11 +7,11 @@ import { parse } from 'date-fns';
 // 2. Mapping table: Each category now contains title and description
 const categoryDetails = {
   'life-in-japan': {
-    title: '🌸 日本探險家',
+    title: '日本探險家',
     description: '一些日本的各種大小事，生活是場在曠野奔跑的大冒險。這裡紀錄路上小花的可愛、或掉進陷阱的無奈。'
   },
   'life-lab': {
-    title: '🥯 生活實驗室',
+    title: '生活實驗室',
     description: '想嘗試的事情太多，無法每件事都正經八百屋，這裡是輕鬆實驗室' 
   },
   // add here if there is new category ...
@@ -84,7 +84,7 @@ const seo = {
     </TextCardSection>
 
     <section class="blog-posts-list__section">
-      <h1>文章</h1>
+      <h2>文章</h2>
       <BlogPostsList posts={posts} />
     </section>
   </Container>

@@ -15,8 +15,9 @@ const { label, name, options, required} = Astro.props;
     /* Fixes gloss effect on select dropdowns in Safari */
     -webkit-appearance: none;
   }
-  .form-field__container select:focus {
-    border: 2px solid var(--form-field-border-focus-color, #000);
+  .form-field__container select:focus-visible {
+    border: 2px solid var(--color-accent);
+    outline: 2px solid transparent;
   }
 </style>
 

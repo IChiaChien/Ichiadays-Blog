@@ -1,41 +1,78 @@
 :root {
-	/* Theme Colors */
-	--theme-primary: #e38a20;
-	--theme-primary-hover: #eb870f;
-	--theme-on-primary: hsl(0, 0%, 100%);
+	/* Semantic colors */
+	--color-bg: #fffffe;
+	--color-text: #5e4536;
+	--color-surface: #ffecd9;
+	--color-surface-muted: #faf6f1;
+	--color-border: #e8dfd6;
+	--color-accent: #e38a20;
+	--color-accent-hover: #eb870f;
+	--color-on-accent: hsl(0, 0%, 100%);
 
-	--theme-bg: #fffffe;
-	--theme-on-bg: #5e4536;
-
-	--theme-surface-1: #ffecd9;
-	--theme-on-surface-1: #5e4536;
-
+	/* Legacy theme aliases */
+	--theme-primary: var(--color-accent);
+	--theme-primary-hover: var(--color-accent-hover);
+	--theme-on-primary: var(--color-on-accent);
+	--theme-bg: var(--color-bg);
+	--theme-on-bg: var(--color-text);
+	--theme-surface-1: var(--color-surface);
+	--theme-on-surface-1: var(--color-text);
 	--theme-surface-2: #6a4d34;
 	--theme-on-surface-2: #ffffff;
 
-	/* Theme Shapes */
-	--theme-shape-radius: clamp(1rem, 2rem, 3rem);
-	--theme-button-border-radius: 0.5rem;
+	/* Radius */
+	--radius-sm: 0.5rem;
+	--radius-md: 1rem;
+	--radius-lg: clamp(1.25rem, 1rem + 0.5vw, 1.75rem);
+	--theme-shape-radius: var(--radius-lg);
+	--theme-button-border-radius: var(--radius-sm);
 
-	/* Theme Transition */
+	/* Theme transition */
 	--theme-transition: 0.2s ease-in-out;
 
-	/* Theme Layout */
-	--section-margin: 3rem;
-	--theme-grid-gap: 1rem;
+	/* Spacing */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-12: 3rem;
+	--space-16: 4rem;
+
+	/* Layout */
+	--section-margin: var(--space-12);
+	--theme-grid-gap: var(--space-6);
 	--container-max-width: 1440px;
 	--container-max-width-narrow: 960px;
-	--container-padding: 0 1rem;
-
+	--container-padding: 0 var(--space-4);
+	--content-measure: 42em;
 	--theme-blog-post-header-width: 1200px;
 
-	/* Theme Fonts -  */
-	--theme-font-family-serif: 'Rubik', sans-serif;
-	--theme-font-family-sans: 'Rubik', sans-serif;
+	--header-padding-y: var(--space-2);
+	--header-padding-x: var(--space-4);
+	--header-logo-height: 3.5rem;
+	--header-height: calc(var(--header-logo-height) + (var(--header-padding-y) * 2));
+	--navbar-height: var(--header-height);
 
-	--font-body: var(--theme-font-family-sans);
-	--font-heading: var(--theme-font-family-sans);
+	/* Typography */
+	--font-family-sans: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans CJK TC', sans-serif;
+	--theme-font-family-serif: var(--font-family-sans);
+	--theme-font-family-sans: var(--font-family-sans);
+	--font-body: var(--font-family-sans);
+	--font-heading: var(--font-family-sans);
 
-	--font-size-base: 18px;
-	--line-height-base: 1.7;
+	--font-size-xs: 0.79rem;
+	--font-size-sm: 0.889rem;
+	--font-size-md: 1rem;
+	--font-size-lg: 1.125rem;
+	--font-size-xl: 1.25rem;
+	--font-size-2xl: clamp(1.5rem, 1.35rem + 0.6vw, 1.75rem);
+	--font-size-3xl: clamp(1.875rem, 1.65rem + 0.9vw, 2.5rem);
+	--font-size-base: 1.125rem;
+
+	--line-height-body: 1.9;
+	--line-height-heading: 1.45;
+	--line-height-base: var(--line-height-body);
+	--letter-spacing-body: 0.02em;
 }
