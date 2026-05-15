@@ -132,15 +132,58 @@ table tr:nth-child(even) {
 	}
 }
 
-/* --- Other Elements --- */
-blockquote {
-	font-size: var(--font-size-base);
-	font-weight: 500;
+/* --- Blockquotes --- */
+/*
+  Default markdown `>` → Notion-style quote (left bar, no fill).
+  For callout boxes, use: <blockquote class="callout">...</blockquote>
+*/
+#article blockquote {
+	position: relative;
+	font-size: inherit;
+	font-weight: 400;
+	line-height: var(--line-height-body);
+	color: color-mix(in oklch, var(--color-text) 90%, transparent);
 	margin: 0 0 var(--space-6) 0;
-	padding: var(--space-4) var(--space-6);
+	padding: 0 0 0 var(--space-4);
+	background: none;
+	border: none;
+	border-radius: 0;
+}
+
+#article blockquote::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0.15em;
+	bottom: 0.15em;
+	width: 3px;
+	border-radius: 999px;
+	background: var(--color-quote-bar);
+}
+
+#article blockquote > * {
+	margin: 0;
+}
+
+#article blockquote > * + * {
+	margin-top: var(--space-2);
+}
+
+#article blockquote.callout {
+	font-weight: 500;
+	color: var(--color-text);
+	padding: var(--space-3) var(--space-4);
 	background-color: var(--color-surface-muted);
 	border: 1px solid var(--color-border);
-	border-radius: var(--radius-md);
+	border-radius: var(--radius-sm);
+}
+
+#article blockquote.callout::before {
+	display: none;
+}
+
+#article blockquote.callout > * + * {
+	margin-top: var(--space-3);
 }
 
 pre {

@@ -8,6 +8,7 @@
 	--color-accent: #e38a20;
 	--color-accent-hover: #eb870f;
 	--color-on-accent: hsl(0, 0%, 100%);
+	--color-quote-bar: color-mix(in oklch, var(--color-accent) 42%, var(--color-border));
 
 	/* Legacy theme aliases */
 	--theme-primary: var(--color-accent);
