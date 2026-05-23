@@ -21,18 +21,21 @@ export const footerLists = [
 		title: '網站連結',
 		items: [
 			{
-				title: '日本探險家',
-				slug: '/category/life-in-japan',
+				title: '首頁',
+				slug: '/',
 			},
 			{
-				title: '生活實驗室',
-				slug: '/category/life-lab',
+				title: '日本求職',
+				slug: '/category/job-hunting',
 			},
 			{
-				title: '關於一珈',
+				title: '別科申請',
+				slug: '/category/bekka',
+			},
+			{
+				title: '關於我',
 				slug: '/about',
 			},
-      
 		],
 	},
 ];

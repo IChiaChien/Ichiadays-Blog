@@ -1,13 +1,20 @@
 :root {
+	/* Brand palette */
+	--color-cacao: #5A3E39;
+	--color-pale-yolk: #f9f0df;
+	--color-dusty-rose: #DD805D;
+	--color-orange: #E86D1A;
+	--color-cream: #E4D8C8;
+
 	/* Semantic colors */
 	--color-bg: #fffffe;
-	--color-text: #5e4536;
-	--color-surface: #ffecd9;
-	--color-surface-muted: #faf6f1;
-	--color-border: #e8dfd6;
-	--color-accent: #e38a20;
-	--color-accent-hover: #eb870f;
-	--color-on-accent: hsl(0, 0%, 100%);
+	--color-text: #5A3E39;           /* Cacao */
+	--color-surface: #E4D8C8;        /* Cream */
+	--color-surface-muted: #f5ede3;
+	--color-border: #d9cab8;
+	--color-accent: #E86D1A;         /* Orange */
+	--color-accent-hover: #DD805D;   /* Dusty rose */
+	--color-on-accent: #ffffff;
 	--color-quote-bar: color-mix(in oklch, var(--color-accent) 42%, var(--color-border));
 
 	/* Legacy theme aliases */
@@ -18,7 +25,7 @@
 	--theme-on-bg: var(--color-text);
 	--theme-surface-1: var(--color-surface);
 	--theme-on-surface-1: var(--color-text);
-	--theme-surface-2: #6a4d34;
+	--theme-surface-2: #5A3E39;      /* Cacao */
 	--theme-on-surface-2: #ffffff;
 
 	/* Radius */

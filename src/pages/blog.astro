@@ -1,27 +1,22 @@
 ---
-import { parse, isBefore } from 'date-fns';
-import {
-	Container,
-	TextCardSection,
-	BlogPostsList,
-} from '@components/odyssey-theme';
+import { parse, format, isBefore } from 'date-fns';
+import { Container, BlogPostsList } from '@components/odyssey-theme';
 import Layout from '../layouts/Page.astro';
-import NewsletterForm from '../components/forms/NewsletterForm.astro';
-const allFiles = await Astro.glob('./*.mdx'); 
 
-const posts = await Astro.glob('./*.mdx').then(posts => 
-    posts.filter(post => 
-        post.frontmatter.publishDate // Retrieve only dated articles
-    )
-		.map(({ frontmatter, url }) => ({
-			title: frontmatter.title,
-			description: frontmatter.description,
-			authors: frontmatter.authors,
-			publishDate: parse(frontmatter.publishDate, 'MMMM d, yyyy', new Date()),
-			featuredImage: frontmatter.featuredImage,
-			excerpt: frontmatter.excerpt,
-			href: url,
-		}))
+const posts = await Astro.glob('./*.mdx').then(posts =>
+	posts
+		.filter(post => post.frontmatter.publishDate)
+		.map(({ frontmatter, url }) => {
+			const publishDate = parse(frontmatter.publishDate, 'MMMM d, yyyy', new Date());
+			return {
+				title: frontmatter.title,
+				excerpt: frontmatter.description,
+				publishDate,
+				formattedDate: format(publishDate, 'yyyy/MM/dd'),
+				featuredImage: frontmatter.featuredImage,
+				href: url,
+			};
+		})
 		.sort((a, b) => {
 			if (isBefore(a.publishDate, b.publishDate)) return 1;
 			if (isBefore(b.publishDate, a.publishDate)) return -1;
@@ -36,21 +31,44 @@ const seo = {
 ---
 
 <Layout {seo}>
+	<!-- Full-width Pale Yolk header -->
+	<div class="blog-hero__wrapper">
+		<Container>
+			<div class="blog-hero__content">
+				<h1>全部文章</h1>
+				<p>分享日本留學、東京工作、工程師生活的點點滴滴。</p>
+			</div>
+		</Container>
+	</div>
+
+	<!-- Article list -->
 	<Container>
-		<TextCardSection>
-			<h1>全部文章</h1>
-			<p>
-				分享日本留學、東京工作、工程師生活的點點滴滴。
-			</p>
-		</TextCardSection>
 		<section class="blog-posts-list__section">
-			<h2>文章</h2>
 			<BlogPostsList posts={posts} />
 		</section>
 	</Container>
 </Layout>
 
 <style>
+	.blog-hero__wrapper {
+		background-color: var(--color-pale-yolk);
+		border-radius: 0;
+		padding-top: calc(var(--header-height) + clamp(4vh, 8vh, 10vh));
+		padding-bottom: clamp(4vh, 8vh, 10vh);
+	}
+	.blog-hero__content {
+		max-width: 42rem;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.blog-hero__content h1 {
+		margin-bottom: var(--space-4);
+	}
+	.blog-hero__content p {
+		margin: 0;
+		line-height: var(--line-height-body);
+		opacity: 0.85;
+	}
 	.blog-posts-list__section {
 		margin: var(--section-margin) auto;
 	}

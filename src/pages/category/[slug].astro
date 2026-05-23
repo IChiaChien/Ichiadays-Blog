@@ -1,10 +1,9 @@
 ---
 import Layout from '../../layouts/Page.astro';
-import { Container, BlogPostsList, TextCardSection } from '@components/odyssey-theme';
+import { Container, BlogPostsList } from '@components/odyssey-theme';
 import { generateTagData } from '../../utils/helpers.js';
-import { parse } from 'date-fns';
+import { parse, format } from 'date-fns';
 
-// 2. Mapping table: Each category now contains title and description
 const categoryDetails = {
   'life-in-japan': {
     title: '日本探險家',
@@ -12,21 +11,28 @@ const categoryDetails = {
   },
   'life-lab': {
     title: '生活實驗室',
-    description: '想嘗試的事情太多，無法每件事都正經八百屋，這裡是輕鬆實驗室' 
+    description: '想嘗試的事情太多，無法每件事都正經八百屋，這裡是輕鬆實驗室'
   },
-  // add here if there is new category ...
+  'job-hunting': {
+    title: '日本求職經驗談',
+    description: '身為工程師，兩次在日求職，經歷日商中途採用以及外資 offer get。紀錄一珈真實經驗，從個人背景，準備事項，到面試細節。'
+  },
+  'bekka': {
+    title: '慶應與早稻田別科申請',
+    description: '成功申請慶應與早稻田語言學程的完整指南，包含文件準備、學習計畫書寫法與個人真實花費。'
+  },
 };
 
 export async function getStaticPaths() {
   const allFiles = await Astro.glob('../*.mdx');
 
   const validPosts = allFiles.filter(post => {
-    return post.frontmatter.categories && 
-           post.frontmatter.categories.length > 0 && 
+    return post.frontmatter.categories &&
+           post.frontmatter.categories.length > 0 &&
            !post.frontmatter.draft;
   });
 
-  const sortedPosts = validPosts.sort((a, b) => 
+  const sortedPosts = validPosts.sort((a, b) =>
     new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf()
   );
 
@@ -36,27 +42,30 @@ export async function getStaticPaths() {
       allCategoriesUnique.add(category);
     })
   });
-  
+
   const allCategoriesData = generateTagData(allCategoriesUnique);
 
   return allCategoriesData.map((category) => {
-    const rawPosts = sortedPosts.filter((post) => 
+    const rawPosts = sortedPosts.filter((post) =>
       post.frontmatter.categories.includes(category.title)
     );
-    
-    const formattedPosts = rawPosts.map(({ frontmatter, url }) => ({
-      title: frontmatter.title,
-      description: frontmatter.description,
-      publishDate: parse(frontmatter.publishDate, 'MMMM d, yyyy', new Date()),
-      featuredImage: frontmatter.featuredImage,
-      excerpt: frontmatter.excerpt,
-      href: url,
-    }));
+
+    const formattedPosts = rawPosts.map(({ frontmatter, url }) => {
+      const publishDate = parse(frontmatter.publishDate, 'MMMM d, yyyy', new Date());
+      return {
+        title: frontmatter.title,
+        excerpt: frontmatter.description,
+        publishDate,
+        formattedDate: format(publishDate, 'yyyy/MM/dd'),
+        featuredImage: frontmatter.featuredImage,
+        href: url,
+      };
+    });
 
     return {
-      params: { slug: category.slug }, 
+      params: { slug: category.slug },
       props: {
-        category: category.title, 
+        category: category.title,
         posts: formattedPosts
       }
     };
@@ -65,7 +74,6 @@ export async function getStaticPaths() {
 
 const { category, posts } = Astro.props;
 
-// 3. Retrieve the corresponding classification information
 const currentInfo = categoryDetails[category] || {
   title: `${category}`,
   description: `這是 ${category} 分類下的所有文章。`
@@ -77,20 +85,45 @@ const seo = {
 ---
 
 <Layout seo={seo}>
-  <Container>
-    <TextCardSection>
-      <h1>{currentInfo.title}</h1>
-      <p>{currentInfo.description}</p>
-    </TextCardSection>
+  <!-- Full-width Pale Yolk header -->
+  <div class="category-hero__wrapper">
+    <Container>
+      <div class="category-hero__content">
+        <h1>{currentInfo.title}</h1>
+        <p>{currentInfo.description}</p>
+      </div>
+    </Container>
+  </div>
 
+  <!-- Article list -->
+  <Container>
     <section class="blog-posts-list__section">
-      <h2>文章</h2>
       <BlogPostsList posts={posts} />
     </section>
   </Container>
 </Layout>
 
 <style>
+  .category-hero__wrapper {
+    background-color: var(--color-pale-yolk);
+    border-radius: 0;
+    /* push content below the fixed navbar */
+    padding-top: calc(var(--header-height) + clamp(4vh, 8vh, 10vh));
+    padding-bottom: clamp(4vh, 8vh, 10vh);
+  }
+  .category-hero__content {
+    max-width: 42rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .category-hero__content h1 {
+    margin-bottom: var(--space-4);
+  }
+  .category-hero__content p {
+    margin: 0;
+    line-height: var(--line-height-body);
+    opacity: 0.85;
+  }
   .blog-posts-list__section {
     margin: var(--section-margin) auto;
   }

@@ -1,99 +1,159 @@
 ---
-import { Container, FeatureCard, BlogPostsList, Button } from '@components/odyssey-theme';
+import { Container, BlogPostsList, Button } from '@components/odyssey-theme';
 import Layout from '../layouts/Page.astro';
 import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
-import { parse } from 'date-fns'; // use date to order
+import { parse, format } from 'date-fns';
 
-// 1. Get the latest 3 posts
 const posts = await Astro.glob('./*.mdx').then(posts =>
 	posts
-		.map(({ frontmatter, url }) => ({
-			title: frontmatter.title,
-			description: frontmatter.description,
-			publishDate: parse(frontmatter.publishDate, 'MMMM d, yyyy', new Date()),
-			featuredImage: frontmatter.featuredImage,
-			href: url,
-		}))
-		.sort((a, b) => b.publishDate - a.publishDate) // 按日期降序
-		.slice(0, 4) // 只取前 4 篇
+		.map(({ frontmatter, url }) => {
+			const publishDate = parse(frontmatter.publishDate, 'MMMM d, yyyy', new Date());
+			return {
+				title: frontmatter.title,
+				excerpt: frontmatter.description,
+				publishDate,
+				formattedDate: format(publishDate, 'yyyy/MM/dd'),
+				featuredImage: frontmatter.featuredImage,
+				href: url,
+			};
+		})
+		.sort((a, b) => b.publishDate - a.publishDate)
+		.slice(0, 3)
 );
 
 const seo = {
 	title: '一珈寫日子| 日本生活探險, 生活實驗室',
 	description: '分享日本留學、東京工作、工程師生活的點點滴滴',
 };
+
+const categories = [
+	{
+		title: '日本求職經驗談',
+		description: '身為工程師，兩次在日求職，經歷日商中途採用以及外資 offer get。紀錄一珈真實經驗，從個人背景，準備事項，到面試細節。',
+		href: '/category/job-hunting',
+	},
+	{
+		title: '慶應與早稻別科申請',
+		description: '2023 年成功申請上慶應與早稻田日本語言學程，包含個人真實花費。比起日本私立語校，教你申請 CP 值更高的日文別科。',
+		href: '/category/bekka',
+	},
+	{
+		title: '生活實驗室',
+		description: '想嘗試的事情太多，無法每件事都正經八百屋，這裡是輕鬆實驗室。（內容構想中⋯希望能產出些好玩的）',
+		href: '/category/life-lab',
+	},
+];
 ---
 
 <Layout {seo}>
 	<!-- Part 1: Hero Section -->
 	<HomeHeroSection />
 
-	<Container>
-        <!-- Part 2: Category -->
-		<section class="feature-card__section">
-			<h2>文章分類</h2>
-			<div class="feature-card__grid">
-                <!-- Category 1 -->
-				<FeatureCard 
-                    href="/category/life-in-japan" 
-                    title="日本探險家" 
-                    imgSrc="/assets/images/home/categories/jp_explorer"
-                >
-                </FeatureCard>
-                
-                <!-- Category 2 -->
-				<FeatureCard 
-                    href="/category/life-lab" 
-                    title="生活實驗室" 
-                    imgSrc="/assets/images/home/categories/life_lab"
-                >
-                </FeatureCard>
+	<!-- Part 2: Talk about (Category Cards) -->
+	<div class="talk-about__wrapper">
+		<Container>
+			<section class="talk-about__section">
+				<h2>Talk About</h2>
+				<div class="talk-about__grid">
+					{categories.map((cat) => (
+						<a class="category-card" href={cat.href}>
+							<h3 class="category-card__title">{cat.title}</h3>
+							<p class="category-card__desc">{cat.description}</p>
+						</a>
+					))}
+				</div>
+			</section>
+		</Container>
+	</div>
 
-                <!-- Add more categories here -->
-			</div>
-		</section>
-	</Container>
-
-    <!-- Part3：Recently P -->
+	<!-- Part 3: Latest Posts -->
 	<Container>
 		<section class="blog-posts-list__section">
-			<h2>最新文章</h2>
+			<h2>Latest</h2>
 			<BlogPostsList posts={posts} />
-            
-            <div class="view-all-btn">
-                <Button href="/blog">查看所有文章 &rarr;</Button>
-            </div>
+			<div class="view-all-btn">
+				<Button href="/blog">所有文章 &rarr;</Button>
+			</div>
 		</section>
 	</Container>
 </Layout>
 
 <style>
-	.feature-card__section,
-    .blog-posts-list__section {
+	/* Talk about section */
+	.talk-about__wrapper {
+		background-color: var(--color-pale-yolk);
+		padding-block: var(--space-12);
+	}
+	.talk-about__section {
+		max-width: var(--container-max-width-narrow);
+		margin: 0 auto;
+	}
+	.talk-about__section > h2 {
+		text-align: center;
+		margin-bottom: var(--space-8);
+		font-size: var(--font-size-3xl);
+	}
+	.talk-about__grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--space-6);
+	}
+	.category-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		background-color: var(--color-bg);
+		border-radius: 0;
+		border: 1px solid var(--color-border);
+		aspect-ratio: 25 / 30;
+		padding: var(--space-6);
+		text-decoration: none;
+		color: inherit;
+		overflow: hidden;
+		transition: box-shadow var(--theme-transition), transform var(--theme-transition);
+	}
+	.category-card:hover {
+		box-shadow: 0 0.75rem 1.5rem rgba(90, 62, 57, 0.1);
+		transform: translateY(-2px);
+	}
+	.category-card__title {
+		font-size: var(--font-size-lg);
+		font-weight: 700;
+		margin: 0 0 var(--space-4);
+		color: var(--color-text);
+	}
+	.category-card__desc {
+		font-size: var(--font-size-sm);
+		line-height: 1.75;
+		color: var(--color-text);
+		margin: 0;
+		opacity: 0.85;
+	}
+
+	/* Latest section */
+	.blog-posts-list__section {
 		margin: var(--section-margin) auto;
 	}
-
-	.feature-card__section > h2,
 	.blog-posts-list__section > h2 {
 		margin-top: 0;
+		text-align: center;
+		font-size: var(--font-size-3xl);
+	}
+	.view-all-btn {
+		display: flex;
+		justify-content: center;
+		margin-top: var(--space-8);
 	}
 
-	.feature-card__grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr); 
-		gap: var(--theme-grid-gap);
-	}
-
-    .view-all-btn {
-        display: flex;
-        justify-content: center;
-        margin-top: var(--space-8);
-    }
-
-    /* For smartphone */
-	@media (max-width: 768px) {
-		.feature-card__grid {
-			grid-template-columns: 1fr; /* 手機版變一欄 */
+	@media (max-width: 900px) {
+		.talk-about__grid {
+			grid-template-columns: 1fr;
+		}
+		.category-card {
+			aspect-ratio: auto;
+			padding: var(--space-8) var(--space-6);
 		}
 	}
 </style>

@@ -1,32 +1,36 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { Container, Button } from '@components/odyssey-theme';
+import { Container } from '@components/odyssey-theme';
 ---
 
 <Container>
 	<section class="hero-section__section">
-		<div class="hero-section__text">
-			<h1>一珈寫日子</h1>
-			<p>
-				用文字記錄名為生活的獨特冒險，這由無數個選擇編織而成的故事。
-			</p>
-			<div class="hero-btns__container">
-				<Button href="/about" customIcon>
-					關於我
-					<Fragment slot="icon">
-						<Icon name="ic:baseline-chevron-right" />
-					</Fragment>
-				</Button>
-			</div>
-		</div>
 		<div class="hero-section__image">
 			<picture>
 				<img
 					src="/assets/images/home/profile.png"
-					alt="Ichia Profile"
-					id="home-profile-image"
+					alt="一珈"
+					id="home-hero-image"
 				/>
 			</picture>
+		</div>
+		<div class="hero-section__text">
+			<h1>嗨！我是一珈</h1>
+			<p>
+				歡迎來到一珈寫日子，個人部落格。用文字記錄名為生活的獨特冒險，這由無數個選擇編織而成的故事。<br />
+				一個來自台灣的女生，在日本擔任資料科學家，也正學習用文字分析自己。
+			</p>
+			<div class="hero-btns__container">
+				<a
+					href="https://www.instagram.com/ichia.days_/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="ig-link"
+				>
+					<Icon name="mdi:instagram" width="22px" height="22px" />
+					一珈生活
+				</a>
+			</div>
 		</div>
 	</section>
 </Container>
@@ -37,19 +41,9 @@ import { Container, Button } from '@components/odyssey-theme';
 		padding-block: var(--space-8);
 		min-height: min(72vh, calc(100vh - var(--header-height)));
 		display: grid;
-		grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+		grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
 		align-items: center;
 		gap: var(--space-8);
-	}
-	.hero-section__text {
-		justify-self: start;
-		max-width: 28rem;
-	}
-	.hero-btns__container {
-		display: flex;
-		align-items: center;
-		gap: var(--space-4);
-		margin-top: var(--space-4);
 	}
 	.hero-section__image {
 		display: flex;
@@ -59,7 +53,38 @@ import { Container, Button } from '@components/odyssey-theme';
 		width: 100%;
 		max-height: min(70vh, 36rem);
 		object-fit: cover;
-		border-radius: var(--radius-lg);
+		border-radius: 0;
+	}
+	.hero-section__text {
+		justify-self: start;
+		max-width: 30rem;
+	}
+	.hero-section__text h1 {
+		margin-bottom: var(--space-4);
+	}
+	.hero-section__text p {
+		line-height: var(--line-height-body);
+		color: var(--color-text);
+	}
+	.hero-btns__container {
+		display: flex;
+		align-items: center;
+		gap: var(--space-4);
+		margin-top: var(--space-6);
+	}
+	.ig-link {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
+		text-decoration: none;
+		color: var(--color-accent);
+		font-weight: 500;
+		font-size: var(--font-size-lg);
+		transition: color var(--theme-transition), opacity var(--theme-transition);
+	}
+	.ig-link:hover {
+		color: var(--color-accent-hover);
+		opacity: 0.85;
 	}
 	@media (max-width: 768px) {
 		.hero-section__section {
@@ -67,12 +92,11 @@ import { Container, Button } from '@components/odyssey-theme';
 			min-height: auto;
 			padding-block: var(--space-6);
 		}
-		.hero-section__text {
-			order: -1;
-			max-width: none;
-		}
 		.hero-section__image img {
 			max-height: 24rem;
+		}
+		.hero-section__text {
+			max-width: none;
 		}
 	}
 </style>
