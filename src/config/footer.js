@@ -5,14 +5,9 @@ export const footerSocials = [
     icon: "mdi:instagram",
   },
   {
-    name: 'Github',
-    url: 'https://github.com/IChiaChien',
-    icon: "mdi:github",
-  },
-  {
     name: 'Mail',
-    url: '',
-    icon: "ic:mail",
+    url: 'mailto:ichiadays@gmail.com',
+    icon: "mdi:email",
   },
 ]
 
